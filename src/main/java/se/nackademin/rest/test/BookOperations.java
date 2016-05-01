@@ -9,6 +9,7 @@ import static com.jayway.restassured.RestAssured.given;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
 import java.util.UUID;
+import static com.jayway.restassured.RestAssured.given;
 
 
 //import com.jayway.restassured.http.ContentType;
@@ -20,7 +21,7 @@ import java.util.UUID;
  */
 public class BookOperations {
     private static final String BASE_URL="http://localhost:8080/librarytest/rest/";
-    //private Response lastBookData;
+    AuthorOperations authorOperations = new AuthorOperations();
     public void BookOperations(){
     
     }
@@ -45,10 +46,20 @@ public class BookOperations {
     
     
     public Response createNewBook() {
+        // making sure static author exists
+        authorOperations.createStaticAuthors();
+        
+        
+        AuthorOperations authorOperations= new AuthorOperations();
         String resourceName = "books";
         String title = UUID.randomUUID().toString();
         String description = UUID.randomUUID().toString();
         String isbn = UUID.randomUUID().toString();
+
+        String latestAuthorName="Nicklas Carlsson";
+        String latestAuthorId="999999999";
+
+        
         
         String postBodyTemplate =""
                 + "{\n" 
@@ -57,12 +68,17 @@ public class BookOperations {
                 +"    \"description\":\"%s\",\n" 
                 +"    \"isbn\":\"%s\",\n" 
                 +"    \"nbOfPage\":411,\n" 
-                +"    \"title\":\"%s\"\n" 
+                +"    \"title\":\"%s\",\n" 
+                +"    \"author\":\n" 
+                +"    {\n" 
+                +"      \"name\":\"%s\",\n" 
+                +"      \"id\":%s\n" 
+                +"    }\n" 
                 +"  }\n" 
                 +"}";
-        String postBody = String.format(postBodyTemplate,description,isbn,title);
+        String postBody = String.format(postBodyTemplate,description,isbn,title,latestAuthorName,latestAuthorId);
         Response postResponse = given().contentType(ContentType.JSON).body(postBody).post(BASE_URL + resourceName);
-        System.out.println("Code:"+postResponse.getStatusCode());
+        //System.out.println("Codeis:"+postResponse.getStatusCode());
         Response getResponse = given().accept(ContentType.JSON).get(BASE_URL+resourceName);
         //getResponse.jsonPath().getJsonObject("book.books[-1]");
         return getResponse;

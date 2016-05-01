@@ -36,10 +36,10 @@ public class MyFirstRestTest {
     @Test
     public void testingCreateBook(){
         BookOperations bookOperations = new BookOperations();
-        System.out.println("HEJ!");
+        
         Response book = bookOperations.createNewBook();
         //System.out.println(book.jsonPath().getJsonObject(basePath)prettyPrint());
-        System.out.println(("statuscode:")+book.getStatusCode());
+        //System.out.println(("statuscode:")+book.getStatusCode());
         System.out.println(book.jsonPath().getString("books.book[-1]"));
     }
 }

@@ -9,6 +9,7 @@ import static com.jayway.restassured.RestAssured.given;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
 import java.util.UUID;
+import static com.jayway.restassured.RestAssured.given;
 
 
 /**
@@ -26,5 +27,27 @@ public class AuthorOperations {
         Response getResponse = given().accept(ContentType.JSON).get(BASE_URL+"authors");
         return getResponse.jsonPath().getString("authors.author[-1].name");
     }
-    
+
+    public void createStaticAuthors(){
+        String postBody="{\n" +
+        "\"author\":\n" +
+        "  {\n" +
+        "    \"name\":\"Nicklas Carlsson\",\n" +
+        "    \"id\":999999999\n" +
+        "  }\n" +
+        "}";
+        
+        given().contentType(ContentType.JSON).body(postBody).post(BASE_URL+"authors");
+        
+        postBody="{\n" +
+        "\"author\":\n" +
+        "  {\n" +
+        "    \"name\":\"Sven Svensson\",\n" +
+        "    \"id\":88888888\n" +
+        "  }\n" +
+        "}";
+        given().contentType(ContentType.JSON).body(postBody).post(BASE_URL+"authors");
+        
+    }
+
 }
