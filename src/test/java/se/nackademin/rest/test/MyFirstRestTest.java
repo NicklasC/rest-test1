@@ -21,7 +21,7 @@ public class MyFirstRestTest {
     public MyFirstRestTest() {
     }
     
-    //@Test
+    @Test
     public void testFetchBook(){
         String resourceName = "books/3";
         // get(BASE_URL+resourceName).body().prettyPrint();

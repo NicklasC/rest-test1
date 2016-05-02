@@ -49,5 +49,17 @@ public class AuthorOperations {
         given().contentType(ContentType.JSON).body(postBody).post(BASE_URL+"authors");
         
     }
+    public void createRandomAuthor(){
+        String name = UUID.randomUUID().toString();
+        String postBody=""+
+        "{\n" +
+        "\"author\":\n" +
+        "  {\n" +
+        "    \"name\":"+name+"\n" +
+        "  }\n" +
+        "}";
+        given().contentType(ContentType.JSON).body(postBody).post(BASE_URL+"authors");
+        
+    }
 
 }

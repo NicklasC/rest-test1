@@ -23,7 +23,7 @@ public class Books {
     BookOperations bookOperations = new BookOperations();
     AuthorOperations authorOperations= new AuthorOperations();
     
-    //@Test
+    @Test
     public void testBooksPost201() {
        
         // Creating random data for new book
@@ -66,7 +66,7 @@ public class Books {
         
     }
 
-    //@Test
+    @Test
     public void testBooksPost400(){
         // Getting allready existing Id in the DB
         String latestId=bookOperations.getLastBookId();
@@ -96,7 +96,7 @@ public class Books {
 
     }
 
-    //@Test
+    @Test
     public void testBooksPut200(){
         
         String newTitle = UUID.randomUUID().toString();
@@ -127,7 +127,7 @@ public class Books {
     
     }
 
-    //@Test
+    @Test
     public void testBooksPut400(){
         
         String title = bookOperations.getLastBookTitle();
@@ -163,7 +163,7 @@ public class Books {
     
     }
 
-    //@Test
+    @Test
     public void testBooksPut404(){
         String postBody="{\n" +
         "\"book\":\n" +

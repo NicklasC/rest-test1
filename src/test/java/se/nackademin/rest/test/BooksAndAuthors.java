@@ -26,22 +26,22 @@ public class BooksAndAuthors {
     public BooksAndAuthors() {
     }
 
-    //@Test
+    @Test
     public void booksByAuthorId(){
         Response postResponse = given().contentType(ContentType.JSON).get(BASE_URL+"/byauthor/999999999");
         assertEquals("Books by authors",200,postResponse.statusCode());
     
     }
-    //@Test
+    @Test
     public void booksGetSpecificBookAuthors200(){
         // /books/{book_id}/authors
         // Making sure we have a book with authors
         bookOperations.createNewBook();
         Response getResponse = given().contentType(ContentType.JSON).get(BASE_URL+"/"+bookOperations.getLastBookId()+"/authors");
-        getResponse.prettyPeek();
+        //getResponse.prettyPeek();
         assertEquals("Author for an existing specified book should be retrieved",200,getResponse.getStatusCode());
     }
-    //@Test
+    @Test
     public void booksGetSpecificBookAuthors404(){
         ///books/{book_id}/authors
         // Making sure we have a book with authors
@@ -50,7 +50,7 @@ public class BooksAndAuthors {
         
         assertEquals("Author for an nonexisting specified cannot be retrieved",404,getResponse.getStatusCode());
     }
-    //@Test
+    @Test
     public void booksAddAuthor200(){
             ///books/{book_id}/authors, POST
         // Making sure we have a book with authors
@@ -70,7 +70,7 @@ public class BooksAndAuthors {
         // TODO: Lägg till kontroll av att den verkligen lagts till        
         //Response postResponse = given().contentType(ContentType.JSON).body(postBody).post(BASE_URL);
     }
-    //@Test
+    @Test
     public void booksAddAuthor400(){
             ///books/{book_id}/authors, POST
         // Making sure we have a book with authors
@@ -90,7 +90,7 @@ public class BooksAndAuthors {
         
     }
     
-    //@Test
+    @Test
     public void booksAddAuthor404(){
             ///books/{book_id}/authors, POST
         // Making sure we have a book with authors
@@ -108,10 +108,5 @@ public class BooksAndAuthors {
         
         assertEquals("Adding author to non-existing book should not be possible",404,postResponse.getStatusCode());
     }
-    
-    
-    
-    //TODO: Add PUT for ///books/{book_id}/authors,
-    
     
 }

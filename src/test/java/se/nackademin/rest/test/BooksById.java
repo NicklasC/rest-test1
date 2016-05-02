@@ -25,7 +25,7 @@ public class BooksById {
     public BooksById() {
     }
 
-    //@Test    
+    @Test    
     public void testBooksByIdGet200(){
         // Making sure we have a book to find
         bookOperations.createNewBook();
@@ -35,7 +35,7 @@ public class BooksById {
         assertEquals("Fetching existing book with ID should give status 200",200,postResponse.getStatusCode());
     }
     
-    //@Test    
+    @Test    
     public void testBooksByIdGet404(){
         Response postResponse = given().contentType(ContentType.JSON).get(BASE_URL+"/1234SDF123451aasdf23465756");
         assertEquals("Fetching non-existing book with ID should give status 404",404,postResponse.getStatusCode());
